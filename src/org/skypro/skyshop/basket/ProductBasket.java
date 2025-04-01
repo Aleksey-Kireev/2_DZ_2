@@ -4,20 +4,20 @@ import org.skypro.skyshop.product.Product;
 
 public class ProductBasket {
 
-    private final Product[] PRODUCTS = new Product[5];
+    private final Product[] products = new Product[5];
     private int size = 0;
 
     public void addProduct(Product product) {
-        if (size >= PRODUCTS.length) {
+        if (size >= products.length) {
             System.out.println("Невозможно добавить продукт.");
             return;
         }
-        PRODUCTS[size++] = product;
+        products[size++] = product;
     }
 
     public int getSummBasket() {
         int summ = 0;
-        for (Product prod : PRODUCTS) {
+        for (Product prod : products) {
             if (prod != null) {
                 summ += prod.getPrice();
             }
@@ -25,12 +25,12 @@ public class ProductBasket {
         return summ;
     }
 
-    public void allPrint() {
+    public void printBasket() {
         if (size == 0) {
             System.out.println("- = В корзине пусто = -");
             return;
         }
-        for (Product prod : PRODUCTS) {
+        for (Product prod : products) {
             if (prod != null) {
                 System.out.println(prod);
             }
@@ -38,8 +38,8 @@ public class ProductBasket {
         System.out.println("Итого: " + getSummBasket() + " руб.");
     }
 
-    public boolean getReq(String nameReq) {
-        for (Product prod : PRODUCTS) {
+    public boolean getCompairProduct(String nameReq) {
+        for (Product prod : products) {
             if (prod != null && prod.getProductName().equals(nameReq)) {
                 return true;
             }
@@ -48,8 +48,8 @@ public class ProductBasket {
     }
 
     public void clearBasket() {
-        for (int i = 0; i < PRODUCTS.length; i++) {
-            PRODUCTS[i] = null;
+        for (int i = 0; i < products.length; i++) {
+            products[i] = null;
         }
         size = 0;
     }
