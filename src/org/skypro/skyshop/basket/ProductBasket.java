@@ -30,12 +30,14 @@ public class ProductBasket {
             System.out.println("- = В корзине пусто = -");
             return;
         }
+        int summ = 0;
         for (Product prod : products) {
             if (prod != null) {
                 System.out.println(prod);
+                summ += prod.getPrice();
             }
         }
-        System.out.println("Итого: " + getSummBasket() + " руб.");
+        System.out.println("Итого: " + summ + " руб.");
     }
 
     public boolean getCompairProduct(String nameReq) {

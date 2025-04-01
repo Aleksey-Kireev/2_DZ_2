@@ -34,6 +34,7 @@ public class App {
         basket.printBasket();
         basket.addProduct(meat);
         basket.addProduct(sugar);
+        System.out.println();
 //    --- Попытка добавить еще один продукт
         basket.addProduct(milk);
         System.out.println();
