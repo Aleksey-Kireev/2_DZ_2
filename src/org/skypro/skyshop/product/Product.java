@@ -5,7 +5,9 @@ import java.util.Objects;
 public abstract class Product {
     private final String productName;
 
-    public Product(String productName, int price) {
+    public abstract Boolean isSpecial();
+
+    public Product(String productName) {
         this.productName = productName;
     }
 
