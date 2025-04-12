@@ -31,13 +31,18 @@ public class ProductBasket {
             return;
         }
         int summ = 0;
+        int count = 0;
         for (Product prod : products) {
+            if (prod != null && prod.isSpecial()) {
+                count++;
+            }
             if (prod != null) {
                 System.out.println(prod);
                 summ += prod.getPrice();
             }
         }
         System.out.println("Итого: " + summ + " руб.");
+        System.out.println("Специальных товаров: " + count + " шт.");
     }
 
     public boolean getCompairProduct(String nameReq) {
