@@ -9,6 +9,28 @@ public class SimpleProduct extends Product {
     }
 
     @Override
+    public String getSearchTerm() {
+        return getProductName();
+    }
+
+    @Override
+    public String getContentType() {
+        return "Product Simple";
+
+    }
+
+    @Override
+    public String getName() {
+        return getProductName();
+    }
+
+   /* @Override
+    public String getStringRepresentation() {
+        return getProductName() + " - " + getContentType();
+    }*/
+
+
+    @Override
     public Boolean isSpecial() {
         return false;
     }
