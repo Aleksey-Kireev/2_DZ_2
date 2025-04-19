@@ -25,4 +25,20 @@ public class DiscountedProduct extends Product {
     public int getPrice() {
         return basePrice - (basePrice * discount / 100);
     }
+
+    @Override
+    public String getSearchTerm() {
+        return getProductName();
+    }
+
+    @Override
+    public String getContentType() {
+        return "Product Discount";
+    }
+
+    @Override
+    public String getName() {
+        return getProductName();
+    }
+
 }

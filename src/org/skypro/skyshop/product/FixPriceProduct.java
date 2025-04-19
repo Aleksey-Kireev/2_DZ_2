@@ -22,4 +22,20 @@ public class FixPriceProduct extends Product {
     public int getPrice() {
         return FIX_PRICE;
     }
+
+    @Override
+    public String getSearchTerm() {
+        return getProductName();
+    }
+
+    @Override
+    public String getContentType() {
+        return "Product FixPrice";
+    }
+
+    @Override
+    public String getName() {
+        return getProductName();
+    }
+
 }
