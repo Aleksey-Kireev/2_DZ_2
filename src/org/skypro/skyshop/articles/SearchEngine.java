@@ -3,7 +3,6 @@ package org.skypro.skyshop.articles;
 public class SearchEngine {
     private final Searchable[] search;
     private int num = 0;
-//    private final Searchable[] result = new Searchable[5];
 
     public SearchEngine(int item) {
         this.search = new Searchable[item];
@@ -16,15 +15,6 @@ public class SearchEngine {
             System.out.println("Нет свободного места.");
         }
     }
-
-  /*  public void print(String find, Searchable[] result) {
-        System.out.printf(" === Поиск по магазину === \n Ключевое слово - %s \n ", find);
-        for (Searchable s : result) {
-            if (s != null) {
-                System.out.println(s.getStringRepresentation());
-            }
-        }
-    }*/
 
     public Searchable[] Search(String query) {
         Searchable[] result = new Searchable[5];

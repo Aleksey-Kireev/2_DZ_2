@@ -12,7 +12,7 @@ public class App {
 
 
     public static void print(String find, Searchable[] result) {
-        System.out.printf(" === Поиск по магазину === \n Ключевое слово - %s \n ", find);
+        System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
         for (Searchable s : result) {
             if (s != null) {
                 System.out.println(s.getStringRepresentation());

@@ -19,7 +19,6 @@ public abstract class Product implements Searchable {
 
     public abstract int getPrice();
 
-
     @Override
     public String toString() {
         return String.format("< %s : %d руб.", getProductName(), getPrice());

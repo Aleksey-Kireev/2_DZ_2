@@ -8,10 +8,6 @@ public class FixPriceProduct extends Product {
         super(productName);
     }
 
-//    @Override
-//    public String getS
-
-
     @Override
     public String toString() {
         return String.format("< %s c фиксированной ценой : Фиксированная цена  %d руб.", getProductName(), getPrice());
@@ -42,8 +38,4 @@ public class FixPriceProduct extends Product {
         return getProductName();
     }
 
-   /* @Override
-    public String getStringRepresentation() {
-        return getProductName() + " - " + getContentType();
-    }*/
 }

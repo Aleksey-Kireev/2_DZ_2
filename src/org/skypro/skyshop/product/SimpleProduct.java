@@ -24,12 +24,6 @@ public class SimpleProduct extends Product {
         return getProductName();
     }
 
-   /* @Override
-    public String getStringRepresentation() {
-        return getProductName() + " - " + getContentType();
-    }*/
-
-
     @Override
     public Boolean isSpecial() {
         return false;

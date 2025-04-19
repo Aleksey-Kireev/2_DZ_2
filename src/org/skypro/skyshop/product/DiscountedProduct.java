@@ -41,8 +41,4 @@ public class DiscountedProduct extends Product {
         return getProductName();
     }
 
-   /* @Override
-    public String getStringRepresentation() {
-        return getProductName() + " - " + getContentType();
-    }*/
 }

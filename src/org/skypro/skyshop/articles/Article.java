@@ -38,8 +38,4 @@ public class Article implements Searchable {
         return titleName;
     }
 
-   /* @Override
-    public String getStringRepresentation() {
-        return getTitleName() + " - " + getContentType();
-    }*/
 }
