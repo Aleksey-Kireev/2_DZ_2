@@ -1,5 +1,6 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.articles.BestResultNotFound;
 import org.skypro.skyshop.articles.SearchEngine;
 import org.skypro.skyshop.articles.Article;
 import org.skypro.skyshop.articles.Searchable;
@@ -7,6 +8,7 @@ import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.basket.ProductBasket;
+
 
 public class App {
 
@@ -91,10 +93,18 @@ public class App {
         searchEngine.add(milk);
         searchEngine.add(sugar);
 
-        Article buckwheat = new Article("Как варить гречку", "Статья про приготовление блюд из гречневой крупы.");
+        Article buckwheat = new Article("Как варить гречку", "Статья про приготовление блюд из гречневой крупы. \n " +
+                "Для проверки мы дабавим слово крупа еще раз, а затем еще раз укрупненно");
         Article wallpaper = new Article("Поклейка обоев своими руками", "Статья о самостоятельном наклеивание " +
-                "рулонных обоев.");
-        Article rice = new Article("Как сварить рисовую крупу", "Статья про приготовление блюд из рисовой крупы.");
+                "рулонных обоев.\n" +
+                "570 рублей за квадратный метр. Да-да, именно столько придется заплатить, чтобы рабочие из ремонтной " +
+                " фирмы поклеили обои в комнате по стандартной схеме с удалением старых, нанесением грунтовки и  " +
+                "шпаклевки и выравниванием стен. А теперь подсчитайте, во сколько обойдется вся квартира!  И это без " +
+                "стоимости обоев!\n" +
+                "Предлагаем вам сэкономить и поклеить обои самостоятельно. Мы подробно расскажем вам, как сделать " +
+                "так, чтобы оклейка обоев прошла на ура и с результатом 100%.");
+        Article rice = new Article("Как сварить рисовую крупу", "Статья про приготовление блюд из рисовой крупы. ведь" +
+                " рисовая крупа всем крупам крупа");
         Article salo = new Article("Как засолить сало в домашних условиях", "Несколько простых рецептов по засолке " +
                 "сала.");
 
@@ -112,6 +122,88 @@ public class App {
         findArticle = "круп";
         results = searchEngine.Search(findArticle);
         print(findArticle, results);
+
+
+//        - - - -  = = = = Задание № 4 ---- Исключения = = = =  - - - - -
+
+//        Exception проверки
+        System.out.println("\n - - - -  = = = = Задание № 4 ---- Исключения = = = =  - - - - - \n");
+
+        try {
+            SimpleProduct eggs = new SimpleProduct(null, 54);
+            basket.addProduct(eggs);
+        } catch (IllegalArgumentException exc) {
+            System.out.println("Добавление SimpleProduct");
+            System.out.println(exc.getMessage() + "\n");
+        }
+
+        try {
+            SimpleProduct eggs = new SimpleProduct("Яйцо", -54);
+            basket.addProduct(eggs);
+        } catch (IllegalArgumentException exc) {
+            System.out.println("Добавление SimpleProduct");
+            System.out.println(exc.getMessage() + "\n");
+        }
+
+        try {
+            DiscountedProduct onion = new DiscountedProduct("Лук", -650, 120);
+            basket.addProduct(onion);
+        } catch (IllegalArgumentException exc) {
+            System.out.println("Добавление DiscountedProduct");
+            System.out.println(exc.getMessage() + "\n");
+        }
+
+        try {
+            DiscountedProduct onion = new DiscountedProduct("Лук", 650, 120);
+            basket.addProduct(onion);
+
+        } catch (IllegalArgumentException exc) {
+            System.out.println("Добавление DiscountedProduct");
+            System.out.println(exc.getMessage() + "\n");
+        }
+
+        try {
+            FixPriceProduct lemon = new FixPriceProduct("");
+            basket.addProduct(lemon);
+        } catch (IllegalArgumentException exc) {
+            System.out.println("Добавление FixPriceProduct");
+            System.out.println(exc.getMessage() + "\n");
+        }
+
+        basket.printBasket();
+
+//        Проверка поиска наиболее подходящего объекта критериям поиска
+        try {
+            String findString = "круп";
+            Searchable indexSubStr1 = searchEngine.bestSearchObj(findString);
+            System.out.println("Наиболее подходящее = " + indexSubStr1);
+        } catch (BestResultNotFound exc) {
+            System.out.println("exc = " + exc);
+        }
+
+        System.out.println();
+
+        try {
+            String findString = "обо";
+            Searchable indexSubStr2 = searchEngine.bestSearchObj(findString);
+            System.out.println("Наиболее подходящее = " + indexSubStr2);
+        } catch (BestResultNotFound ext) {
+            System.out.println("По запросу " + ext.getMessage());
+        }
+
+        System.out.println();
+
+//        Поиск несуществующего объекта
+        try {
+            String findString = "водка";
+            Searchable indexSubStr2 = searchEngine.bestSearchObj(findString);
+            System.out.println("Наиболее подходящее = " + indexSubStr2);
+        } catch (BestResultNotFound ext) {
+            System.out.println("По запросу " + ext.getMessage());
+        }
+
+        System.out.println();
+
 
     }
 

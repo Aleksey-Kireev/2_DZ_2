@@ -9,8 +9,12 @@ public abstract class Product implements Searchable {
 
     public abstract Boolean isSpecial();
 
-    public Product(String productName) {
+    public Product(String productName) throws IllegalArgumentException {
+        if (productName == null || productName.isBlank()) {
+            throw new IllegalArgumentException("Неизвестное или неправильное имя продукта");
+        }
         this.productName = productName;
+
     }
 
     public String getProductName() {
