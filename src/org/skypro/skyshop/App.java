@@ -6,14 +6,16 @@ import org.skypro.skyshop.articles.Article;
 import org.skypro.skyshop.articles.Searchable;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
+import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.basket.ProductBasket;
 
+import java.util.List;
 
 public class App {
 
 
-    public static void print(String find, Searchable[] result) {
+    public static void print(String find, List<Searchable> result) {
         System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
         for (Searchable s : result) {
             if (s != null) {
@@ -30,6 +32,7 @@ public class App {
 //    Печать пустой корзины
         System.out.println("Содержимое пустой корзины:");
         basket.printBasket();
+
         System.out.println();
 
         SimpleProduct banana = new SimpleProduct("Банан", 320);
@@ -53,6 +56,7 @@ public class App {
         System.out.println();
 //    --- Попытка добавить еще один продукт
         basket.addProduct(milk);
+        basket.addProduct(fish);
         System.out.println();
 
 //      Печатаем всю корзину с продуктами
@@ -61,6 +65,32 @@ public class App {
 
         System.out.println();
         System.out.println("Общая стоимость продуктов в корзине: " + basket.getSummBasket() + " руб.");
+
+//        - - - = = =  Задание № 5    ( List )  = = = - - -
+
+        System.out.println("\n  - - - = = =  Задание № 5    ( List )  = = = - - - \n");
+
+//        Удаляем один продукт
+        List<Product> deleteBasket = basket.removeProduct("Молоко");
+        basket.printRemovedList((deleteBasket));
+
+        System.out.println();
+
+//        Удаляем еще один продукт
+        deleteBasket.addAll(basket.removeProduct("Яблоко"));
+        basket.printRemovedList((deleteBasket));
+        System.out.println();
+
+//        Удаляем не существующий продукт
+        deleteBasket.addAll(basket.removeProduct("Соль"));
+        basket.printRemovedList((deleteBasket));
+        System.out.println();
+
+//      Печатаем всю корзину с продуктами
+        System.out.println("Содержимое корзины:");
+        basket.printBasket();
+        System.out.println();
+
 
         System.out.println();
         System.out.println("Поиск Хлеба в корзине:");
@@ -86,7 +116,7 @@ public class App {
 
         System.out.println("\n======= Реализуем ДЗ № 3 - ИНТЕРФЕЙСЫ - =======\n");
 
-        SearchEngine searchEngine = new SearchEngine(10);
+        SearchEngine searchEngine = new SearchEngine();
 
         searchEngine.add(banana);
         searchEngine.add(apple);
@@ -114,14 +144,14 @@ public class App {
         searchEngine.add(rice);
 
         String findArticle = "Яблок";
-        Searchable[] results = searchEngine.Search(findArticle);
-        print(findArticle, results);
+        List<Searchable> resultList = searchEngine.search(findArticle);
+        print(findArticle, resultList);
 
         System.out.println();
 
         findArticle = "круп";
-        results = searchEngine.Search(findArticle);
-        print(findArticle, results);
+        resultList = searchEngine.search(findArticle);
+        print(findArticle, resultList);
 
 
 //        - - - -  = = = = Задание № 4 ---- Исключения = = = =  - - - - -
