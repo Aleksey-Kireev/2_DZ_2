@@ -2,17 +2,17 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
+import java.util.*;
+
 public class ProductBasket {
 
-    private final Product[] products = new Product[5];
+    private final List<Product> products = new LinkedList<>();
     private int size = 0;
 
     public void addProduct(Product product) {
-        if (size >= products.length) {
-            System.out.println("Невозможно добавить продукт.");
-            return;
-        }
-        products[size++] = product;
+        products.add(product);
+        size++;
+
     }
 
     public int getSummBasket() {
@@ -54,9 +54,42 @@ public class ProductBasket {
         return false;
     }
 
+    public void printRemovedList(List<Product> productRemove) {
+        if (productRemove.isEmpty()) {
+            System.out.println(" Удаленных продуктов нет. ");
+        } else {
+            System.out.println("Список удаленных продуктов: ");
+            for (Product prod : productRemove) {
+                System.out.println(prod);
+            }
+        }
+    }
+
+    public List<Product> removeProduct(String name) {
+        List<Product> productRemove = new LinkedList<>();
+        Iterator<Product> prod = products.iterator();
+
+        while (prod.hasNext()) {
+            Product tempProd = prod.next();
+
+            if (tempProd != null && tempProd.getProductName().equals(name)) {
+                System.out.printf("- Продукт <<  %s  >> добавлен в удаленные %n", tempProd.getProductName());
+                productRemove.add(tempProd);
+                prod.remove();
+            }
+        }
+        if (productRemove.isEmpty()) {
+            System.out.printf("- %s такого продукта нет %n", name);
+        }
+
+        return productRemove;
+    }
+
     public void clearBasket() {
-        for (int i = 0; i < products.length; i++) {
-            products[i] = null;
+        Iterator<Product> prod = products.iterator();
+        while (prod.hasNext()) {
+            prod.next();
+            prod.remove();
         }
         size = 0;
     }
