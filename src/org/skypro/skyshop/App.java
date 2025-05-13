@@ -18,7 +18,6 @@ public class App {
 
     public static void print(String find, TreeMap<String, Searchable> result) {
         System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
-//        for (Searchable s : result) {
         for (Map.Entry<String, Searchable> s : result.entrySet()) {
             if (s != null) {
                 System.out.println(s.getValue().getStringRepresentation());
@@ -149,6 +148,9 @@ public class App {
 
         System.out.println("\n======= Реализуем ДЗ № 6 - MAP - =======\n");
 
+//        Добавляем еще несколько продуктов и статью для организации поиска нескольких товаров и наиболее подходящего
+//        совпадения
+
         SimpleProduct appleGold = new SimpleProduct("Яблоко Gold", 600);
         FixPriceProduct milkDiscont = new FixPriceProduct("Молоко Эконом");
 
@@ -162,7 +164,6 @@ public class App {
 
         String findArticle = "Яблок";
 
-//        List<Searchable> resultList = searchEngine.search(findArticle);
         TreeMap<String, Searchable> resultList = searchEngine.search(findArticle);
         print(findArticle, resultList);
 
@@ -270,9 +271,7 @@ public class App {
 
         System.out.println();
 
-
     }
-
 
 }
 

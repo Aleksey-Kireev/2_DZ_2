@@ -15,9 +15,7 @@ public class SearchEngine {
         search.add(searchObject);
     }
 
-    //    public List<Searchable> search(String query) {
     public TreeMap<String, Searchable> search(String query) {
-//        List<Searchable> result = new ArrayList<>();
         TreeMap<String, Searchable> result = new TreeMap<>();
 
         for (Searchable s : search) {
@@ -57,6 +55,5 @@ public class SearchEngine {
         System.out.println("Искомое слово встречается - " + score + " раз.");
         return bestResult;
     }
-
 
 }
