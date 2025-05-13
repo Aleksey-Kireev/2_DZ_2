@@ -10,13 +10,11 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.basket.ProductBasket;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class App {
-
 
     public static void print(String find, TreeMap<String, Searchable> result) {
         System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
@@ -147,6 +145,21 @@ public class App {
         searchEngine.add(salo);
         searchEngine.add(rice);
 
+//        - - - -  = = = = Задание № 6 ---- Реализуем проверку MAP  и Интерфейсы = = = =  - - - - -
+
+        System.out.println("\n======= Реализуем ДЗ № 6 - MAP - =======\n");
+
+        SimpleProduct appleGold = new SimpleProduct("Яблоко Gold", 600);
+        FixPriceProduct milkDiscont = new FixPriceProduct("Молоко Эконом");
+
+        searchEngine.add(appleGold);
+        searchEngine.add(milkDiscont);
+
+        Article apples = new Article("Длительное хранение яблок в условиях городских квартир", "Лучшим местом для " +
+                "хранения яблок в городской квартире всегда был и остается застекленный балкон или лоджияю Потому что" +
+                " яблоки требуют прохлады, идеальная температура хранения для них от -2°С до +5°С.");
+        searchEngine.add(apples);
+
         String findArticle = "Яблок";
 
 //        List<Searchable> resultList = searchEngine.search(findArticle);
@@ -156,6 +169,12 @@ public class App {
         System.out.println();
 
         findArticle = "круп";
+        resultList = searchEngine.search(findArticle);
+        print(findArticle, resultList);
+
+        System.out.println();
+
+        findArticle = "Молоко";
         resultList = searchEngine.search(findArticle);
         print(findArticle, resultList);
 
@@ -220,7 +239,18 @@ public class App {
         System.out.println();
 
         try {
-            String findString = "обо";
+            String findString = "Обо";
+            Searchable indexSubStr2 = searchEngine.bestSearchObj(findString);
+            System.out.println("Наиболее подходящее = " + indexSubStr2);
+        } catch (BestResultNotFound ext) {
+            System.out.println("По запросу " + ext.getMessage());
+        }
+
+
+        System.out.println();
+
+        try {
+            String findString = "яблок";
             Searchable indexSubStr2 = searchEngine.bestSearchObj(findString);
             System.out.println("Наиболее подходящее = " + indexSubStr2);
         } catch (BestResultNotFound ext) {

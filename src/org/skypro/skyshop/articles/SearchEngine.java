@@ -1,7 +1,6 @@
 package org.skypro.skyshop.articles;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -16,13 +15,13 @@ public class SearchEngine {
         search.add(searchObject);
     }
 
-//    public List<Searchable> search(String query) {
+    //    public List<Searchable> search(String query) {
     public TreeMap<String, Searchable> search(String query) {
 //        List<Searchable> result = new ArrayList<>();
         TreeMap<String, Searchable> result = new TreeMap<>();
 
         for (Searchable s : search) {
-            if (s != null && s.getSearchTerm().contains(query)) {
+            if (s != null && s.getSearchTerm().toLowerCase().contains(query.toLowerCase())) {
                 result.put(s.getName(), s);
             }
         }
@@ -39,11 +38,11 @@ public class SearchEngine {
             if (s != null) {
                 String subStr = s.getSearchTerm().toLowerCase();
 
-                int indexSubStr = subStr.indexOf(str, index);
+                int indexSubStr = subStr.indexOf(str.toLowerCase(), index);
                 while (indexSubStr != -1) {
                     numb++;
                     index = indexSubStr + str.length();
-                    indexSubStr = subStr.indexOf(str, index);
+                    indexSubStr = subStr.indexOf(str.toLowerCase(), index);
                 }
             }
             if (numb > score) {
