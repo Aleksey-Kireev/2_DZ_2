@@ -10,16 +10,20 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.basket.ProductBasket;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class App {
 
 
-    public static void print(String find, List<Searchable> result) {
+    public static void print(String find, TreeMap<String, Searchable> result) {
         System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
-        for (Searchable s : result) {
+//        for (Searchable s : result) {
+        for (Map.Entry<String, Searchable> s : result.entrySet()) {
             if (s != null) {
-                System.out.println(s.getStringRepresentation());
+                System.out.println(s.getValue().getStringRepresentation());
             }
         }
     }
@@ -144,7 +148,9 @@ public class App {
         searchEngine.add(rice);
 
         String findArticle = "Яблок";
-        List<Searchable> resultList = searchEngine.search(findArticle);
+
+//        List<Searchable> resultList = searchEngine.search(findArticle);
+        TreeMap<String, Searchable> resultList = searchEngine.search(findArticle);
         print(findArticle, resultList);
 
         System.out.println();
