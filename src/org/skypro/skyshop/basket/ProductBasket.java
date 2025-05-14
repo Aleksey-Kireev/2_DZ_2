@@ -6,21 +6,20 @@ import java.util.*;
 
 public class ProductBasket {
 
-    private final TreeMap<String, Product> products = new TreeMap<>();
-    private int size = 0;
+    private final TreeMap<String, List<Product>> products = new TreeMap<>();
 
     public void addProduct(Product product) {
-        products.put(product.getProductName(), product);
-        size++;
+
+        products.computeIfAbsent(product.getProductName(), k -> new ArrayList<>()).add(product);
 
     }
 
     public int getSummBasket() {
         int summ = 0;
-        for (Map.Entry<String, Product> prod : products.entrySet()) {
-
-            summ += prod.getValue().getPrice();
-
+        for (Map.Entry<String, List<Product>> prod : products.entrySet()) {
+            for (Product p : prod.getValue()) {
+                summ += p.getPrice();
+            }
         }
         return summ;
     }
@@ -28,17 +27,16 @@ public class ProductBasket {
     public void printBasket() {
         int summ = 0;
         int count = 0;
-        for (Map.Entry<String, Product> prod : products.entrySet()) {
-            if (prod != null && prod.getValue().isSpecial()) {
-                count++;
-            }
-
-            if (prod != null) {
+        for (Map.Entry<String, List<Product>> prod : products.entrySet()) {
+            for (Product p : prod.getValue()) {
+                if (p.isSpecial()) {
+                    count++;
+                }
                 System.out.println(prod);
-                summ += prod.getValue().getPrice();
+                summ += p.getPrice();
             }
         }
-        if (size == 0 || summ == 0) {
+        if (summ == 0) {
             System.out.println("- = В корзине пусто = -");
             return;
         }
@@ -47,9 +45,14 @@ public class ProductBasket {
     }
 
     public boolean getCompairProduct(String nameReq) {
-        for (Map.Entry<String, Product> prod : products.entrySet()) {
-            if (prod != null && prod.getValue().getProductName().equals(nameReq)) {
-                return true;
+        if (nameReq == null) {
+            return false;
+        }
+        for (Map.Entry<String, List<Product>> prod : products.entrySet()) {
+            for (Product p : prod.getValue()) {
+                if (p != null && p.getProductName().equals(nameReq)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -67,22 +70,23 @@ public class ProductBasket {
     }
 
     public List<Product> removeProduct(String name) {
-        List<Product> productRemove = new LinkedList<>();
+        List<Product> productRemove = new ArrayList<>();
 
-        Iterator<Map.Entry<String, Product>> iter = products.entrySet().iterator();
+        for (Map.Entry<String, List<Product>> iter : products.entrySet()) {
+            List<Product> prodList = iter.getValue();
+            Iterator<Product> productIterator = prodList.iterator();
 
-        while (iter.hasNext()) {
-            Map.Entry<String, Product> prod = iter.next();
+            while (productIterator.hasNext()) {
+                Product prod = productIterator.next();
 
-            Product tempProd = prod.getValue();
-
-            if (tempProd.getProductName().equals(name)) {
-                System.out.printf("- Продукт <<  %s  >> добавлен в удаленные %n", tempProd.getProductName());
-                productRemove.add(tempProd);
-                iter.remove();
+                if (prod != null && prod.getProductName().equals(name)) {
+                    productIterator.remove();
+                    productRemove.add(prod);
+                    System.out.printf("- Продукт <<  %s  >> добавлен в удаленные %n", prod.getProductName());
+                }
             }
-
         }
+
         if (productRemove.isEmpty()) {
             System.out.printf("- %s такого продукта нет %n", name);
         }
@@ -91,7 +95,6 @@ public class ProductBasket {
 
     public void clearBasket() {
         products.clear();
-        size = 0;
     }
 }
 
