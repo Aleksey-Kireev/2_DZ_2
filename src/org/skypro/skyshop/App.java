@@ -12,11 +12,10 @@ import org.skypro.skyshop.basket.ProductBasket;
 
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class App {
 
-    public static void print(String find, TreeMap<String, Searchable> result) {
+    public static void print(String find, Map<String, Searchable> result) {
         System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
         for (Map.Entry<String, Searchable> s : result.entrySet()) {
             if (s != null) {
@@ -164,7 +163,7 @@ public class App {
 
         String findArticle = "Яблок";
 
-        TreeMap<String, Searchable> resultList = searchEngine.search(findArticle);
+        Map<String, Searchable> resultList = searchEngine.search(findArticle);
         print(findArticle, resultList);
 
         System.out.println();

@@ -6,7 +6,7 @@ import java.util.*;
 
 public class ProductBasket {
 
-    private final TreeMap<String, List<Product>> products = new TreeMap<>();
+    private final Map<String, List<Product>> products = new TreeMap<>();
 
     public void addProduct(Product product) {
 
