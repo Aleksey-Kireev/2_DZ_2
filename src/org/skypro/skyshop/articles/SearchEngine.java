@@ -2,6 +2,8 @@ package org.skypro.skyshop.articles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SearchEngine {
     private final List<Searchable> search;
@@ -14,11 +16,12 @@ public class SearchEngine {
         search.add(searchObject);
     }
 
-    public List<Searchable> search(String query) {
-        List<Searchable> result = new ArrayList<>();
+    public Map<String, Searchable> search(String query) {
+        Map<String, Searchable> result = new TreeMap<>();
+
         for (Searchable s : search) {
-            if (s != null && s.getSearchTerm().contains(query)) {
-                result.add(s);
+            if (s != null && s.getSearchTerm().toLowerCase().contains(query.toLowerCase())) {
+                result.put(s.getName(), s);
             }
         }
         return result;
@@ -34,11 +37,11 @@ public class SearchEngine {
             if (s != null) {
                 String subStr = s.getSearchTerm().toLowerCase();
 
-                int indexSubStr = subStr.indexOf(str, index);
+                int indexSubStr = subStr.indexOf(str.toLowerCase(), index);
                 while (indexSubStr != -1) {
                     numb++;
                     index = indexSubStr + str.length();
-                    indexSubStr = subStr.indexOf(str, index);
+                    indexSubStr = subStr.indexOf(str.toLowerCase(), index);
                 }
             }
             if (numb > score) {
@@ -53,6 +56,5 @@ public class SearchEngine {
         System.out.println("Искомое слово встречается - " + score + " раз.");
         return bestResult;
     }
-
 
 }
