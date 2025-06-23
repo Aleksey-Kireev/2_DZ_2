@@ -10,21 +10,21 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.basket.ProductBasket;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class App {
 
-    public static void print(String find, Map<String, Searchable> result) {
+    //    public static void print(String find, Map<String, Searchable> result) {
+    public static void print(String find, Set<Searchable> result) {
         System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
-        for (Map.Entry<String, Searchable> s : result.entrySet()) {
+        for (Searchable s : result) {
             if (s != null) {
-                System.out.println(s.getValue().getStringRepresentation());
+                System.out.println(s.getStringRepresentation());
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BestResultNotFound {
         System.out.println("---- ==== org.skypro.skyshop.App.main ==== ----\n");
 
         ProductBasket basket = new ProductBasket();
@@ -42,6 +42,8 @@ public class App {
         FixPriceProduct sugar = new FixPriceProduct("Сахар");
         SimpleProduct milk = new SimpleProduct("Молоко", 132);
         SimpleProduct fish = new SimpleProduct("Рыба", 740);
+        SimpleProduct fish1 = new SimpleProduct("Рыба", 1500);
+
 
 //    Добавляем продукты в корзину
         basket.addProduct(banana);
@@ -53,10 +55,13 @@ public class App {
         basket.printBasket();
         basket.addProduct(meat);
         basket.addProduct(sugar);
+        basket.addProduct(apple);
+        basket.addProduct(apple);
         System.out.println();
 //    --- Попытка добавить еще один продукт
         basket.addProduct(milk);
         basket.addProduct(fish);
+        basket.addProduct(fish1);
         System.out.println();
 
 //      Печатаем всю корзину с продуктами
@@ -140,6 +145,7 @@ public class App {
 
         searchEngine.add(buckwheat);
         searchEngine.add(wallpaper);
+        searchEngine.add(wallpaper);
         searchEngine.add(salo);
         searchEngine.add(rice);
 
@@ -151,9 +157,12 @@ public class App {
 //        совпадения
 
         SimpleProduct appleGold = new SimpleProduct("Яблоко Gold", 600);
+        DiscountedProduct appleGoldDiscont = new DiscountedProduct("Яблоко Gold", 520, 17);
         FixPriceProduct milkDiscont = new FixPriceProduct("Молоко Эконом");
 
         searchEngine.add(appleGold);
+        searchEngine.add(appleGoldDiscont);
+        searchEngine.add(milkDiscont);
         searchEngine.add(milkDiscont);
 
         Article apples = new Article("Длительное хранение яблок в условиях городских квартир", "Лучшим местом для " +
@@ -161,9 +170,10 @@ public class App {
                 " яблоки требуют прохлады, идеальная температура хранения для них от -2°С до +5°С.");
         searchEngine.add(apples);
 
+
         String findArticle = "Яблок";
 
-        Map<String, Searchable> resultList = searchEngine.search(findArticle);
+        Set<Searchable> resultList = searchEngine.search(findArticle);
         print(findArticle, resultList);
 
         System.out.println();
