@@ -17,11 +17,14 @@ public class App {
     //    public static void print(String find, Map<String, Searchable> result) {
     public static void print(String find, Set<Searchable> result) {
         System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
-        for (Searchable s : result) {
+//        альтернативный метод использования for Each для Set
+        result.forEach(s -> System.out.println(s.getStringRepresentation()));
+//        Старый метод использования for Each
+        /*for (Searchable s : result) {
             if (s != null) {
                 System.out.println(s.getStringRepresentation());
             }
-        }
+        }*/
     }
 
     public static void main(String[] args) throws BestResultNotFound {
