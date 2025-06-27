@@ -19,7 +19,7 @@ public class App {
         System.out.printf(" === Поиск по магазину === %n Ключевое слово - %s %n ", find);
 //        альтернативный метод использования for Each для Set
         result.forEach(s -> System.out.println(s.getStringRepresentation()));
-//        Старый метод использования for Each
+//        Старый метод использования for Each для сравнения
         /*for (Searchable s : result) {
             if (s != null) {
                 System.out.println(s.getStringRepresentation());
