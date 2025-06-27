@@ -32,7 +32,7 @@ public class ProductBasket {
                 if (p.isSpecial()) {
                     count++;
                 }
-                System.out.println(prod);
+                System.out.println(p);
                 summ += p.getPrice();
             }
         }
