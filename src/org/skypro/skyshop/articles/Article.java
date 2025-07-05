@@ -56,14 +56,10 @@ public class Article implements Searchable {
     public static class SearchComparator implements Comparator<Searchable> {
         @Override
         public int compare(Searchable s1, Searchable s2) {
-            System.out.println("Сравниваем: " + s1.getName() + " и " + s2.getName());
             int searchCompare = Integer.compare(s2.getSearchTerm().length(), s1.getSearchTerm().length());
             if (searchCompare == 0) {
-                int result = s1.getSearchTerm().compareTo(s2.getSearchTerm());
-                System.out.println("Результат сравнивнения: " + result);
-                return result;
+                return s1.getSearchTerm().compareTo(s2.getSearchTerm());
             }
-            System.out.println("Результат сравнения по длине: " + searchCompare);
             return searchCompare;
         }
     }

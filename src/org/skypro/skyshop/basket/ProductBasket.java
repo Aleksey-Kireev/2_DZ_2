@@ -15,27 +15,27 @@ public class ProductBasket {
     }
 
     public int getSummBasket() {
-        int summ = 0;
-        for (Map.Entry<String, List<Product>> prod : products.entrySet()) {
-            for (Product p : prod.getValue()) {
-                summ += p.getPrice();
-            }
-        }
-        return summ;
+
+        return products.values().stream()
+                .flatMap(List::stream)
+                .filter(Objects::nonNull)
+                .mapToInt(Product::getPrice)
+                .sum();
+
     }
 
     public void printBasket() {
-        int summ = 0;
-        int count = 0;
-        for (Map.Entry<String, List<Product>> prod : products.entrySet()) {
-            for (Product p : prod.getValue()) {
-                if (p.isSpecial()) {
-                    count++;
-                }
-                System.out.println(p);
-                summ += p.getPrice();
-            }
-        }
+
+        products.values().stream()
+                .flatMap(List::stream)
+                .forEach(System.out::println);
+
+        int summ = getSummBasket();
+        int count = (int) products.values().stream()
+                .flatMap(List::stream)
+                .filter(Product::isSpecial)
+                .count();
+
         if (summ == 0) {
             System.out.println("- = В корзине пусто = -");
             return;
