@@ -1,6 +1,6 @@
 package org.skypro.skyshop.articles;
 
-import java.util.Comparator;
+
 import java.util.Objects;
 
 public class Article implements Searchable {
@@ -53,15 +53,5 @@ public class Article implements Searchable {
         return titleName;
     }
 
-    public static class SearchComparator implements Comparator<Searchable> {
-        @Override
-        public int compare(Searchable s1, Searchable s2) {
-            int searchCompare = Integer.compare(s2.getSearchTerm().length(), s1.getSearchTerm().length());
-            if (searchCompare == 0) {
-                return s1.getSearchTerm().compareTo(s2.getSearchTerm());
-            }
-            return searchCompare;
-        }
-    }
 
 }

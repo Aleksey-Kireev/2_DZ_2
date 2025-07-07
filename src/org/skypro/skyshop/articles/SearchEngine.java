@@ -18,7 +18,7 @@ public class SearchEngine {
         Set<Searchable> result = search.stream()
                 .filter(Objects::nonNull)
                 .filter(s -> s.getSearchTerm().toLowerCase().contains(query.toLowerCase()))
-                .collect(Collectors.toCollection(() -> new TreeSet<>(new Article.SearchComparator())));
+                .collect(Collectors.toCollection(() -> new TreeSet<>(new SearchComparator.SearchComparators())));
 
         if (result.isEmpty()) {
             throw new BestResultNotFound("Нет соответствующих запросу элементов");
