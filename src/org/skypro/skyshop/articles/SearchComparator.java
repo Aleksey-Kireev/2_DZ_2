@@ -3,21 +3,7 @@ package org.skypro.skyshop.articles;
 import java.util.Comparator;
 
 
-public class SearchComparator implements Searchable {
-    @Override
-    public String getSearchTerm() {
-        return "";
-    }
-
-    @Override
-    public String getContentType() {
-        return "";
-    }
-
-    @Override
-    public String getName() {
-        return "";
-    }
+public class SearchComparator {
 
     public static class SearchComparators implements Comparator<Searchable> {
         @Override
